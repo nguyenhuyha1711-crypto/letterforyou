@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fbe9ed">
+<title>Một lá thư dành cho cậu 💌</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rose:#cf7f97;
+  --rose-dark:#ad6178;
+  --rose-soft:#f6dde4;
+  --rose-softer:#fff3f6;
+  --ink:#76535e;
+  --muted:#a27a88;
+  --paper:#fffdf9;
+  --line:#f1dde2;
+  --gold:#e8b982;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  padding:34px 16px 52px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  font-family:"DM Sans",Arial,sans-serif;
+  color:var(--ink);
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,.9), transparent 20%),
+    radial-gradient(circle at 90% 16%, rgba(255,255,255,.65), transparent 16%),
+    radial-gradient(circle at 80% 85%, rgba(255,255,255,.5), transparent 18%),
+    linear-gradient(135deg,#f9e7ed 0%,#f5dce4 40%,#fff0eb 100%);
+}
+.bg-blur{
+  position:fixed; inset:auto;
+  width:320px; height:320px; border-radius:50%;
+  filter:blur(40px); opacity:.38; z-index:0; pointer-events:none;
+  animation:floatBlob 12s ease-in-out infinite;
+}
+.bg-blur.one{background:#ffdbe5; top:-80px; left:-100px}
+.bg-blur.two{background:#ffe8cc; bottom:-100px; right:-80px; animation-delay:-4s}
+.bg-blur.three{background:#f9d1e2; top:35%; right:8%; width:240px; height:240px; animation-delay:-8s}
+@keyframes floatBlob{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(18px,-14px) scale(1.08)}
+}
+
+.floating-layer{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0}
+.float-item{
+  position:absolute; bottom:-40px; color:#d991a6; opacity:.35;
+  animation:rise 14s linear infinite;
+  font-size:22px;
+}
+@keyframes rise{
+  0%{transform:translateY(0) rotate(0deg); opacity:0}
+  10%{opacity:.45}
+  100%{transform:translateY(-115vh) rotate(300deg); opacity:0}
+}
+
+.sparkle{
+  position:fixed; width:8px; height:8px; border-radius:50%;
+  background:radial-gradient(circle,#fff 0%, #ffd3df 70%, transparent 71%);
+  pointer-events:none; z-index:5; animation:sparkleFade .8s linear forwards;
+}
+@keyframes sparkleFade{
+  from{transform:scale(1); opacity:1}
+  to{transform:translateY(-18px) scale(.1); opacity:0}
+}
+
+.container{
+  position:relative; z-index:1;
+  width:100%; max-width:700px;
+  text-align:center;
+}
+.hero{
+  position:relative;
+  background:rgba(255,253,250,.55);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:0 18px 60px rgba(160,95,118,.14);
+  border-radius:28px;
+  padding:26px 18px 30px;
+}
+.hero:before{
+  content:""; position:absolute; inset:10px; border-radius:22px;
+  border:1px solid rgba(233,203,212,.65); pointer-events:none;
+}
+.topline{
+  font-size:11px; letter-spacing:4px; text-transform:uppercase;
+  color:#b68996; font-weight:700;
+}
+.script-title{
+  font-family:"Great Vibes",cursive;
+  font-size:clamp(40px,8vw,62px);
+  color:#c2788f;
+  line-height:1;
+  margin:14px 0 6px;
+}
+h1{
+  margin:4px 0 10px;
+  font-family:"Playfair Display",Georgia,serif;
+  font-size:clamp(28px,6vw,42px);
+  color:#a85f76;
+  font-weight:600;
+}
+.subtitle{
+  margin:0 auto;
+  max-width:430px;
+  color:#a88490;
+  font-size:14px;
+  line-height:1.85;
+}
+.ornament{
+  margin:20px 0 6px;
+  display:flex; align-items:center; justify-content:center; gap:12px;
+  color:#d094a4; font-size:18px;
+}
+.ornament:before,.ornament:after{
+  content:""; width:58px; height:1px;
+  background:linear-gradient(90deg,transparent,#e7beca,transparent);
+}
+
+.envelope-wrap{
+  height:260px; display:grid; place-items:center;
+  margin:12px auto 0; perspective:1000px;
+}
+.envelope{
+  width:min(340px,84vw); height:205px; position:relative; cursor:pointer;
+  border-radius:12px;
+  background:linear-gradient(145deg,#efbcc7,#da8fa5);
+  box-shadow:0 28px 55px rgba(172,98,121,.22), 0 8px 18px rgba(172,98,121,.16);
+  transition:transform .35s ease, box-shadow .35s ease;
+  outline:none;
+  animation:envelopePulse 3.2s ease-in-out infinite;
+}
+@keyframes envelopePulse{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
+}
+.envelope:hover{
+  transform:translateY(-8px) rotate(-1deg);
+  box-shadow:0 34px 65px rgba(172,98,121,.28), 0 10px 22px rgba(172,98,121,.18);
+}
+.envelope:before{
+  content:"";
+  position:absolute; inset:0; border-radius:12px;
+  background:linear-gradient(145deg,#f9d9e0,#ebb6c4);
+  clip-path:polygon(0 0,100% 0,50% 68%);
+  transform-origin:top; z-index:4;
+  transition:transform .9s cubic-bezier(.2,.8,.2,1);
+  filter:drop-shadow(0 5px 4px rgba(160,90,111,.18));
+}
+.envelope:after{
+  content:""; position:absolute; inset:0; z-index:3;
+  clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%);
+  background:
+    linear-gradient(32deg,#d78c9f 0 49.5%,transparent 50%),
+    linear-gradient(-32deg,#e8a7b7 0 49.5%,transparent 50%);
+  border-radius:0 0 12px 12px;
+}
+.paper{
+  position:absolute; left:7%; right:7%; top:14px; height:172px;
+  border-radius:8px; z-index:2;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,0) 40%),
+    repeating-linear-gradient(to bottom,#fffaf6 0,#fffaf6 28px,#f6e8e5 29px);
+  box-shadow:0 5px 12px rgba(129,76,91,.12);
+  transition:transform 1.05s cubic-bezier(.2,.8,.2,1);
+}
+.paper:after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(120deg,transparent 0%, rgba(255,255,255,.55) 45%, transparent 60%);
+  transform:translateX(-130%);
+  animation:paperShine 4s ease-in-out infinite;
+}
+@keyframes paperShine{
+  0%,70%,100%{transform:translateX(-130%)}
+  35%{transform:translateX(130%)}
+}
+.seal{
+  position:absolute; left:50%; top:48%; transform:translate(-50%,-50%);
+  width:58px; height:58px; border-radius:50%; z-index:5;
+  display:grid; place-items:center; font-size:28px; color:#fffaf8;
+  background:radial-gradient(circle at 30% 30%,#e1a6b6,#b9647b);
+  border:1px solid rgba(255,255,255,.75);
+  box-shadow:0 6px 16px rgba(148,80,100,.35);
+}
+.seal:before{
+  content:""; position:absolute; inset:5px; border-radius:50%;
+  border:1px dashed rgba(255,244,247,.6)
+}
+.envelope.open:before{transform:rotateX(180deg); z-index:1}
+.envelope.open .paper{transform:translateY(-112px)}
+#hint{
+  margin:4px 0 8px;
+  font-family:"Playfair Display",Georgia,serif;
+  font-style:italic; font-size:16px; color:#a97c89;
+}
+
+.letter,.reply-box,.replies{
+  position:relative;
+  display:none;
+  margin:22px auto 0;
+  text-align:left;
+  border-radius:24px;
+  background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,251,247,.98));
+  border:1px solid rgba(240,221,226,.95);
+  box-shadow:0 18px 48px rgba(152,97,118,.14);
+  padding:clamp(22px,5vw,38px);
+  overflow:hidden;
+}
+.letter:before,.reply-box:before,.replies:before{
+  content:""; position:absolute; inset:11px; border-radius:18px;
+  border:1px solid rgba(244,231,227,.95); pointer-events:none;
+}
+.letter:after,.reply-box:after,.replies:after{
+  content:""; position:absolute; top:0; left:0; right:0; height:6px;
+  background:linear-gradient(90deg,#f6d5dd,#f5ecd9,#f6d5dd);
+  opacity:.85;
+}
+.letter.show,.reply-box.show,.replies.show{display:block; animation:cardUp .8s ease both}
+@keyframes cardUp{
+  from{opacity:0; transform:translateY(22px) scale(.98)}
+  to{opacity:1; transform:translateY(0) scale(1)}
+}
+.letter h2,.reply-box h3,.replies h3{
+  text-align:center;
+  margin:0 0 24px;
+  color:#b56d83;
+  font-family:"Playfair Display",Georgia,serif;
+  font-weight:600;
+  font-size:clamp(26px,5vw,32px);
+}
+.letter-copy{
+  position:relative;
+  font-family:"Playfair Display",Georgia,serif;
+  font-size:18px; line-height:2.05; color:#6f555f;
+}
+.dropcap{
+  float:left;
+  font-family:"Great Vibes",cursive;
+  font-size:54px;
+  line-height:.9;
+  padding-right:8px;
+  color:#c27c91;
+}
+.signature{
+  text-align:right;
+  font-family:"Great Vibes",cursive;
+  font-size:34px;
+  color:#bb7187;
+  margin:28px 0 6px;
+}
+.flower-line{
+  text-align:center;
+  color:#d090a2;
+  font-size:21px;
+  letter-spacing:8px;
+}
+button{
+  border:0;
+  border-radius:999px;
+  padding:14px 28px;
+  cursor:pointer;
+  color:white;
+  background:linear-gradient(135deg,#d48b9d,#b96f85);
+  font:700 14px "DM Sans",sans-serif;
+  box-shadow:0 10px 22px rgba(188,117,139,.28);
+  transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+}
+button:hover{transform:translateY(-2px); box-shadow:0 14px 26px rgba(188,117,139,.34)}
+button:active{transform:translateY(0)}
+button:disabled{opacity:.55; cursor:not-allowed; transform:none}
+#openReply{
+  animation:glowPulse 2.3s ease-in-out infinite;
+}
+@keyframes glowPulse{
+  0%,100%{box-shadow:0 10px 22px rgba(188,117,139,.28)}
+  50%{box-shadow:0 0 0 8px rgba(221,168,183,.18), 0 14px 30px rgba(188,117,139,.32)}
+}
+.field{margin:0 0 18px}
+label{
+  display:block;
+  margin:0 0 8px 3px;
+  font-size:12px; letter-spacing:.6px; font-weight:700;
+  color:#b08490;
+}
+input,textarea{
+  width:100%;
+  padding:15px 16px;
+  border-radius:14px;
+  border:1px solid #ecd4da;
+  background:rgba(255,255,255,.88);
+  color:#75525d;
+  font:15px "DM Sans",sans-serif;
+  outline:none;
+  transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+textarea{min-height:150px; resize:vertical; line-height:1.8}
+input:focus,textarea:focus{
+  border-color:#d1889b;
+  box-shadow:0 0 0 4px rgba(250,233,238,.95);
+  transform:translateY(-1px);
+}
+.form-actions{text-align:center; margin-top:10px}
+#replyStatus{
+  min-height:20px; margin:18px 0 0; padding:12px 14px;
+  border-radius:14px; text-align:center; font-size:13px; line-height:1.7;
+  overflow-wrap:anywhere;
+}
+#replyStatus.info{background:#fff2f6; color:#a56c80}
+#replyStatus.success{background:#eef8ef; color:#53755c}
+#replyStatus.error{background:#fff0f1; color:#b24c5d}
+
+.reply-item{
+  border-top:1px solid var(--line);
+  padding:18px 4px;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  line-height:1.85;
+  position:relative;
+}
+.reply-item:first-child{border-top:0}
+.reply-item strong{
+  font-family:"Playfair Display",Georgia,serif;
+  color:#aa667d;
+  font-size:18px;
+}
+.reply-date{
+  margin:4px 0 8px;
+  font-size:11px; color:#b2929c;
+}
+.reply-message{font-size:14px; color:#755761}
+.footer{
+  margin-top:30px;
+  letter-spacing:3px; font-size:10px;
+  color:#b38a95;
+}
+
+.heart{
+  position:fixed;
+  bottom:-30px;
+  pointer-events:none;
+  z-index:4;
+  animation:fly 5s linear forwards;
+}
+@keyframes fly{
+  to{transform:translateY(-110vh) rotate(360deg); opacity:0}
+}
+@media(max-width:520px){
+  body{padding:22px 12px 40px}
+  .hero{padding:22px 14px 24px}
+  .envelope-wrap{height:235px}
+  .envelope{height:185px}
+  .paper{height:156px}
+  .letter,.reply-box,.replies{padding:22px 18px}
+  .letter-copy{font-size:16px; line-height:1.95}
+  .signature{font-size:30px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+/* ✨ Bản hiệu ứng nâng cấp */
+.hero{
+  isolation:isolate;
+  box-shadow:0 22px 70px rgba(160,95,118,.16), inset 0 1px rgba(255,255,255,.8);
+}
+.hero:after{
+  content:""; position:absolute; inset:-1px; border-radius:29px; padding:1px;
+  background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(218,154,174,.35),rgba(255,255,255,.8));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  pointer-events:none; z-index:-1;
+}
+.envelope-wrap{filter:drop-shadow(0 10px 18px rgba(179,104,130,.08))}
+.envelope{transform-style:preserve-3d}
+.envelope:focus-visible{outline:3px solid #d58da2;outline-offset:8px}
+.seal{animation:sealShine 3s ease-in-out infinite}
+@keyframes sealShine{
+  0%,100%{box-shadow:0 6px 16px rgba(148,80,100,.35),0 0 0 0 rgba(255,255,255,0)}
+  50%{box-shadow:0 6px 18px rgba(148,80,100,.4),0 0 0 8px rgba(255,255,255,.13)}
+}
+.envelope.open{animation:openBounce .7s ease both}
+@keyframes openBounce{
+  0%{transform:translateY(0) scale(1)}
+  35%{transform:translateY(-13px) scale(1.025)}
+  70%{transform:translateY(2px) scale(.99)}
+  100%{transform:translateY(0) scale(1)}
+}
+.letter,.reply-box,.replies{
+  box-shadow:0 24px 65px rgba(152,97,118,.17),0 3px 12px rgba(255,255,255,.8) inset;
+}
+.letter h2:after,.reply-box h3:after,.replies h3:after{
+  content:""; display:block; width:70px; height:1px; margin:12px auto 0;
+  background:linear-gradient(90deg,transparent,#dca6b5,transparent);
+}
+.letter-copy{animation:inkAppear 1.2s .15s both}
+@keyframes inkAppear{
+  from{opacity:0;filter:blur(3px);transform:translateY(8px)}
+  to{opacity:1;filter:blur(0);transform:translateY(0)}
+}
+.reply-item{animation:replyPop .55s ease both}
+@keyframes replyPop{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+button{position:relative;overflow:hidden}
+button:before{
+  content:"";position:absolute;top:-70%;left:-35%;width:24%;height:240%;
+  transform:rotate(25deg);background:rgba(255,255,255,.32);
+  transition:left .65s ease;
+}
+button:hover:before{left:125%}
+#hint{animation:hintBreath 2.8s ease-in-out infinite}
+@keyframes hintBreath{0%,100%{opacity:.72}50%{opacity:1}}
+.ambient-star{
+  position:fixed;z-index:0;pointer-events:none;color:#fff8fb;
+  text-shadow:0 0 12px rgba(214,147,169,.75);
+  animation:twinkle 3.2s ease-in-out infinite;
+}
+@keyframes twinkle{
+  0%,100%{opacity:.15;transform:scale(.65) rotate(0)}
+  50%{opacity:.9;transform:scale(1.2) rotate(45deg)}
+}
+.burst-heart{
+  position:fixed;z-index:8;pointer-events:none;
+  font-size:18px;will-change:transform,opacity;
+  animation:heartBurst 1.35s cubic-bezier(.15,.7,.25,1) forwards;
+}
+@keyframes heartBurst{
+  0%{opacity:0;transform:translate(0,0) scale(.35) rotate(0)}
+  12%{opacity:1}
+  100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.15) rotate(var(--rot))}
+}
+.petals{
+  position:fixed;top:-35px;z-index:2;pointer-events:none;
+  color:#d98da4;opacity:.55;font-size:15px;
+  animation:petalFall linear forwards;
+}
+@keyframes petalFall{
+  0%{transform:translate3d(0,-5vh,0) rotate(0deg);opacity:0}
+  12%{opacity:.6}
+  100%{transform:translate3d(var(--drift),110vh,0) rotate(560deg);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .ambient-star,.petals,.burst-heart{display:none!important}
+}
+
+</style>
+</head>
+<body>
+<div class="bg-blur one"></div>
+<div class="bg-blur two"></div>
+<div class="bg-blur three"></div>
+<div class="floating-layer" id="floatingLayer" aria-hidden="true"></div>
+
+<main class="container">
+  <section class="hero">
+    <div class="topline">A little secret for you</div>
+    <div class="script-title">For my favorite person</div>
+    <h1>Một lá thư dành cho cậu 💌</h1>
+    <div class="ornament">♡ ✦ ♡</div>
+
+    <div class="envelope-wrap">
+      <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Mở phong thư">
+        <div class="paper"></div>
+        <div class="seal">♥</div>
+      </div>
+    </div>
+    <p id="hint">♡ Chạm nhẹ vào phong thư để mở điều bí mật nhé ♡</p>
+  </section>
+
+  <section class="letter" id="letter">
+    <h2>Gửi cậu ♡</h2>
+    <div class="letter-copy">
+      <!-- BẠN TỰ VIẾT NỘI DUNG LÁ THƯ Ở ĐÂY -->
+      <span class="dropcap">T</span>hật ra mình đã suy nghĩ khá lâu mới quyết định viết những dòng này.<br><br>
+      Mình rất vui vì đã có cơ hội gặp gỡ và quen biết cậu. Những cuộc trò chuyện, những khoảnh khắc bình dị đôi khi lại khiến mình vui hơn rất nhiều.<br><br>
+      Mình không biết phải diễn tả cảm xúc này như thế nào cho thật trọn vẹn. Chỉ muốn thành thật rằng mình có tình cảm với cậu.<br><br>
+      Mình không mong cậu phải trả lời ngay. Chỉ muốn cậu biết rằng có một người đang dành cho cậu sự quan tâm đặc biệt.<br><br>
+      Cảm ơn cậu vì đã xuất hiện trong thế giới nhỏ bé của mình.
+      <!-- KẾT THÚC NỘI DUNG LÁ THƯ -->
+    </div>
+    
+    <div class="flower-line">♡ ❀ ♡</div>
+    <div style="text-align:center; margin-top:22px">
+      <button id="openReply">Trinh có thể hồi đáp qua đây 💌</button>
+    </div>
+  </section>
+
+  <section class="reply-box" id="replyBox">
+    <h3>Gửi Hà lại suy nghĩ của Trinh nhé ♡</h3>
+    <div class="field">
+      <label for="replyName">TÊN HOẶC BIỆT DANH</label>
+      <input id="replyName" maxlength="40" value="Trinh" placeholder="Ví dụ: Trinh">
+    </div>
+    <div class="field">
+      <label for="replyText">LỜI HỒI ÂM</label>
+      <textarea id="replyText" maxlength="3000" placeholder="Điều Trinh muốn nói với Hà..."></textarea>
+    </div>
+    <div class="form-actions">
+      <button id="sendReply" disabled>Gửi lời hồi âm ♡</button>
+    </div>
+    <p id="replyStatus" class="info" role="status" aria-live="polite">Đang kết nối hộp thư…</p>
+  </section>
+
+  <section class="replies" id="replies">
+    <h3>Những lời Trinh gửi 💗</h3>
+    <div id="replyList"></div>
+  </section>
+
+  <p class="footer">MADE WITH YOU · JUST FOR YOU</p>
+</main>
+
+<script>
+(function createFloatingDecor(){
+  const layer = document.getElementById("floatingLayer");
+  const icons = ["♡","♥","✿","❀","✦"];
+  for(let i=0;i<18;i++){
+    const el = document.createElement("div");
+    el.className = "float-item";
+    el.textContent = icons[Math.floor(Math.random()*icons.length)];
+    el.style.left = Math.random()*100 + "vw";
+    el.style.fontSize = (16 + Math.random()*18) + "px";
+    el.style.animationDuration = (10 + Math.random()*10) + "s";
+    el.style.animationDelay = (-Math.random()*15) + "s";
+    layer.appendChild(el);
+  }
+  for(let i=0;i<22;i++){
+    const star=document.createElement("span");
+    star.className="ambient-star";
+    star.textContent="✧";
+    star.style.left=(4+Math.random()*92)+"vw";
+    star.style.top=(5+Math.random()*88)+"vh";
+    star.style.fontSize=(10+Math.random()*13)+"px";
+    star.style.animationDelay=(-Math.random()*4)+"s";
+    layer.appendChild(star);
+  }
+  // Cánh hoa rơi chậm, giới hạn số lượng để trang vẫn nhẹ.
+  setInterval(()=>{
+    if(document.hidden || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const petal=document.createElement("span");
+    petal.className="petals";
+    petal.textContent=Math.random()>.5?"✿":"❀";
+    petal.style.left=Math.random()*100+"vw";
+    petal.style.setProperty("--drift",(Math.random()*180-90)+"px");
+    const duration=9+Math.random()*7;
+    petal.style.animationDuration=duration+"s";
+    document.body.appendChild(petal);
+    setTimeout(()=>petal.remove(),duration*1000);
+  },1100);
+})();
+
+document.addEventListener("pointermove", (e)=>{
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if(Math.random() > 0.16) return;
+  const s = document.createElement("span");
+  s.className = "sparkle";
+  s.style.left = e.clientX + "px";
+  s.style.top = e.clientY + "px";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(), 800);
+});
+</script>
+<script>
+function makeHeartBurst(){
+  const box=document.getElementById("envelope").getBoundingClientRect();
+  const cx=box.left+box.width/2, cy=box.top+box.height/2;
+  const symbols=["♥","♡","✦","✧","❀"];
+  for(let i=0;i<34;i++){
+    const item=document.createElement("span");
+    item.className="burst-heart";
+    item.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+    item.style.left=cx+"px";
+    item.style.top=cy+"px";
+    const angle=(Math.PI*2*i)/34+(Math.random()-.5)*.25;
+    const distance=75+Math.random()*150;
+    item.style.setProperty("--dx",Math.cos(angle)*distance+"px");
+    item.style.setProperty("--dy",Math.sin(angle)*distance+"px");
+    item.style.setProperty("--rot",(Math.random()*100-50)+"deg");
+    item.style.color=["#cf8298","#e5afbd","#d7a96f","#ffffff"][i%4];
+    document.body.appendChild(item);
+    setTimeout(()=>item.remove(),1450);
+  }
+}
+
+function openLetter(){
+  const envelope=document.getElementById("envelope");
+  if(envelope.classList.contains("open")) return;
+  envelope.classList.add("open");
+  makeHeartBurst();
+  document.getElementById("hint").textContent="Một điều chân thành dành riêng cho cậu...";
+  setTimeout(()=>{
+    document.getElementById("letter").classList.add("show");
+    for(let i=0;i<20;i++){
+      const h=document.createElement("div");
+      h.className="heart";h.textContent="♥";
+      h.style.left=Math.random()*100+"vw";
+      h.style.animationDelay=Math.random()*2+"s";
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),6000);
+    }
+  },700);
+}
+document.getElementById("envelope").addEventListener("click",openLetter);
+document.getElementById("envelope").addEventListener("keydown",e=>{
+  if(e.key==="Enter"||e.key===" "){e.preventDefault();openLetter();}
+});
+document.getElementById("openReply").addEventListener("click",()=>{
+  document.getElementById("replyBox").classList.add("show");
+  document.getElementById("replyBox").scrollIntoView({behavior:"smooth",block:"center"});
+});
+</script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const statusEl=document.getElementById("replyStatus");
+const sendButton=document.getElementById("sendReply");
+const replyList=document.getElementById("replyList");
+const setStatus=(message,type="info")=>{
+  statusEl.className=type;
+  statusEl.textContent=message;
+};
+
+let db=null;
+let auth=null;
+let roomId=null;
+let connected=false;
+
+function explainError(error){
+  const code=error?.code||"";
+  if(code==="auth/operation-not-allowed") return "Firebase chưa bật đăng nhập ẩn danh (Authentication → Sign-in method → Anonymous → Enable).";
+  if(code==="auth/unauthorized-domain") return "Tên miền hiện tại chưa được cấp phép. Firebase → Authentication → Settings → Authorized domains, thêm localhost hoặc 127.0.0.1.";
+  if(code==="permission-denied" || code==="firestore/permission-denied") return "Firestore từ chối quyền. Hãy kiểm tra và Publish file firestore.rules.";
+  if(code==="unavailable") return "Không kết nối được Firestore. Kiểm tra Internet và trạng thái dịch vụ Firebase.";
+  if(error?.message?.includes("firebase-config")) return error.message;
+  return (code?code+": ":"")+(error?.message||"Lỗi không xác định.");
+}
+
+async function start(){
+  try{
+    let config;
+    try{
+      config=await import("./firebase-config.js");
+    }catch(e){
+      throw new Error("Không đọc được file firebase-config.js. Đặt file này cùng thư mục với index.html. Chi tiết: "+e.message);
+    }
+    const firebaseConfig=config.firebaseConfig;
+    roomId=config.ROOM_ID;
+
+    if(!firebaseConfig || !firebaseConfig.apiKey || firebaseConfig.apiKey==="DAN_API_KEY_VAO_DAY" ||
+       !firebaseConfig.projectId || firebaseConfig.projectId==="DAN_PROJECT_ID_VAO_DAY" ||
+       !firebaseConfig.appId || firebaseConfig.appId==="DAN_APP_ID_VAO_DAY"){
+      throw new Error("Bạn chưa điền đủ Firebase config thật vào file firebase-config.js.");
+    }
+    if(!roomId) throw new Error("ROOM_ID trong firebase-config.js đang bị trống.");
+
+    const app=initializeApp(firebaseConfig);
+    auth=getAuth(app);
+    db=getFirestore(app);
+    setStatus("Đang tạo kết nối an toàn…","info");
+
+    await signInAnonymously(auth);
+    const repliesRef=collection(db,"rooms",roomId,"replies");
+    const q=query(repliesRef,orderBy("createdAt","desc"));
+
+    onSnapshot(q,snapshot=>{
+      replyList.replaceChildren();
+      document.getElementById("replies").classList.toggle("show",!snapshot.empty);
+      snapshot.forEach(doc=>{
+        const data=doc.data();
+        const item=document.createElement("article");
+        item.className="reply-item";
+        const name=document.createElement("strong");
+        name.textContent=(data.name||"Em")+" ♡";
+        const date=document.createElement("div");
+        date.className="reply-date";
+        date.textContent=data.createdAt?.toDate ? data.createdAt.toDate().toLocaleString("vi-VN") : "Vừa gửi";
+        const message=document.createElement("div");
+        message.textContent=data.message||"";
+        item.append(name,date,message);
+        replyList.append(item);
+      });
+    },error=>{
+      connected=false;
+      sendButton.disabled=true;
+      setStatus("Không tải được thư hồi âm: "+explainError(error),"error");
+    });
+
+    connected=true;
+    sendButton.disabled=false;
+    setStatus("Đã kết nối hộp thư! Em có thể gửi lời hồi âm rồi ♡","success");
+  }catch(error){
+    console.error("Không thể khởi tạo Firebase:",error);
+    connected=false;
+    sendButton.disabled=true;
+    setStatus("Chưa kết nối được: "+explainError(error),"error");
+  }
+}
+
+sendButton.addEventListener("click",async()=>{
+  const name=document.getElementById("replyName").value.trim()||"Em";
+  const message=document.getElementById("replyText").value.trim();
+  if(!message){setStatus("Trinh viết vài dòng rồi hãy gửi nhé ♡","error");return;}
+  if(!connected || !auth?.currentUser || !db){
+    setStatus("Hộp thư chưa kết nối. Hãy xem hướng dẫn lỗi ở đây hoặc Console.","error");
+    return;
+  }
+  sendButton.disabled=true;
+  setStatus("Đang gửi lời hồi âm…","info");
+  try{
+    await addDoc(collection(db,"rooms",roomId,"replies"),{
+      name,message,createdAt:serverTimestamp()
+    });
+    document.getElementById("replyText").value="";
+    setStatus("✓ ĐÃ GỬI THÀNH CÔNG! Hà đã nhận được lời hồi âm của Trinh rồi 💗","success");
+  }catch(error){
+    console.error("Lỗi gửi hồi âm:",error);
+    setStatus("Gửi chưa thành công: "+explainError(error),"error");
+  }finally{
+    sendButton.disabled=false;
+  }
+});
+
+start();
+</script>
+</body>
+</html>
